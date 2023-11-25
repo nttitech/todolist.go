@@ -1,7 +1,21 @@
 {{ template "header" . }}
 <h1>List of tasks</h1>
+<form action="/list" method="GET">
+    <input type="text" name="kw" value="{{ .Kw }}">
+    <br>
+    <input type="radio" name="is_done" value="t" {{ if .Task.IsDone }}checked{{ end }}><label>完了</label>
+    <input type="radio" name="is_done" value="f" {{ if not .Task.IsDone }}checked{{ end }}><label>未完了</label>
+    </br>
+    <input type="submit" value="検索">
+</form>
+<p><a href="/task/new">新規登録</a></p>
+<p><a href="/task/share_form">他のユーザーとタスクを共有</a></p>
 {{ if not .Tasks }}
 <p>登録データがありません．</p>
+<p><a href="/change_name_form">ユーザー名の変更</a></p>
+<p><a href="/change_password_form">パスワードの変更</a></p>
+<p><a href="/logout">ログアウト</a></p>
+<p><a href="/delete_account_form">退会申請</a></p>
 {{ else }}
 <table>
     <tr>
@@ -19,5 +33,17 @@
     </tr>
     {{ end }}
 </table>
+{{ if .PreviousPage}}
+<p><a href="/list?page={{ .PreviousPage  }}&kw={{ .Kw }}&is_done={{ .IsDone }}">前のページ</a> 
+{{ end }}
+{{ if .NextPage}}
+<a href="/list?page={{ .NextPage }}&kw={{ .Kw }}&is_done={{ .IsDone }}">    次のページ</a></p>
+{{ end }}
+<p><a href="/task/completed_rate">直近一週間に作成したタスクの完了率</a></p>
+<p><a href="/change_name_form">ユーザー名の変更</a></p>
+<p><a href="/change_password_form">パスワードの変更</a></p>
+<p><a href="/logout">ログアウト</a></p>
+<p><a href="/delete_account_form">退会申請</a></p>
+
 {{ end }}
 {{ template "footer" }}

@@ -1,0 +1,4 @@
+{{ template "header" . }}
+<h1>{{ .Title }}</h1>
+<p>直近一週間のうちに作成されたタスクの消化率は{{ .Completed_rate }}%です。（消化数：{{ .Completed }}件, 総数：{{ .Total }}件）</p>
+{{ template "footer" }}

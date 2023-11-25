@@ -1,0 +1,10 @@
+{{ template "header" . }}
+<h1>退会申請</h1>
+<p>退会すると、あなたのアカウントおよびアカウントから登録されたすべてのタスクが削除されます。この操作は取り消しできませんのでご注意ください。</p>
+{{ if .Error }}
+<p><font color="#FF0000">{{ .Error }}</font><p>
+{{ end }}
+<form action="/delete_account" method="POST">
+    <input type="submit" value="退会する" onclick="return confirm('本当に退会しますか？');">
+</form>
+{{ template "footer" }}
